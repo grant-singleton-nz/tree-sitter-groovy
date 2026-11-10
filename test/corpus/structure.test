@@ -16,6 +16,40 @@ pipeline {}
   (pipeline
     (closure)))
 ==========
+Pipeline followed by definitions
+==========
+pipeline {
+  agent none
+}
+
+private void helper() {
+  sh 'echo hello'
+}
+
+def x = 1
+---
+(source_file
+  (pipeline
+    (closure
+      (juxt_function_call
+        function: (identifier)
+        args: (argument_list
+          (identifier)))))
+  (function_definition
+    (access_modifier)
+    type: (builtintype)
+    function: (identifier)
+    parameters: (parameter_list)
+    body: (closure
+      (juxt_function_call
+        function: (identifier)
+        args: (argument_list
+          (string
+            (string_content))))))
+  (declaration
+    name: (identifier)
+    value: (number_literal)))
+==========
 Jenkins-specific structure
 ==========
 pipeline {
